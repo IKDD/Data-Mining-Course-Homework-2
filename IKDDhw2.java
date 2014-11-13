@@ -17,7 +17,7 @@ public class IKDDhw2
     {		
 		Connection c = null;
 		Statement stmt = null;
-		final int TEXTRANGE = 50;
+		final int TEXTRANGE = 40;
 		try 
 		{
 			System.out.println("Enter query string on twitter");
@@ -32,7 +32,7 @@ public class IKDDhw2
 			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"twitter\" WHERE q = \'" + query + "\' ORDER BY user_id;" );
 
 			/* Display 1.user_name 2.user_id 3.text */			
-			System.out.format("%-15s%-25s%-15s\n","user_id","user_name","text");
+			System.out.format("\n%-50s%-25s%-15s\n","text","user_name","user_id");
 			System.out.println("================================================"
 					+ "============================================");
 			while ( rs.next() ) 
@@ -44,22 +44,22 @@ public class IKDDhw2
 				if(text.length() > TEXTRANGE)
 				{
 					String temp1 = text.substring(0, TEXTRANGE);
-					System.out.format("%-15d%-25s%-50s", id, name, temp1);
+					System.out.format("%-50s%-25s%-15d", temp1, name, id);
 					int startPosition = TEXTRANGE;
 					String remainder = text.substring( startPosition, text.length() );
 					while(remainder.length() > TEXTRANGE)
 					{
 						String temp2 = remainder.substring(0, TEXTRANGE);
-						System.out.format("\n%-40s%-50s", " ", temp2);
+						System.out.format("\n%-50s", temp2);
 						remainder = remainder.substring( startPosition, remainder.length() );
 					}
-					System.out.format("\n%-40s%-50s\n", " ", remainder);
+					System.out.format("\n%-50s\n", remainder);
 					System.out.println("------------------------------------------------"
 							+ "--------------------------------------------");
 				}
 				else
 				{
-					System.out.format("%-15d%-25s%-50s\n", id, name, text);
+					System.out.format("%-50s%-25s%-15d\n", text, name, id);
 					System.out.println("------------------------------------------------"
 							+ "--------------------------------------------");
 				}					
